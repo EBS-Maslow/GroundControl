@@ -10,10 +10,6 @@ Ground Control is the program which allows you to control the [Maslow CNC machin
 
 From within Ground Control, you can move the machine to where you want to begin a cut, calibrate the machine, open and run a [g-code](/wiki/G-Code-and-MaslowCNC) file, or monitor the progress of an ongoing cut.
 
-At present, the UI looks like this:
-
-![UI](/Documentation/GroundControl.jpg)
-
 Ground Control is written in [Python](https://www.python.org/). It was chosen because it has good cross platform support and is relatively simple to work with.
 
 Two of the goals of Ground Control are:

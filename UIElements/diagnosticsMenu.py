@@ -13,10 +13,10 @@ import time
 class Diagnostics(FloatLayout, MakesmithInitFuncs):
     
     def about(self):
-        popupText = 'Ground Control v' + str(self.data.version) + ' allows you to control the Maslow machine. ' + \
+        popupText = 'Ground Control allows you to control the Maslow machine. ' + \
                     'From within Ground Control, you can move the machine to where you want to begin a cut, calibrate the machine, ' + \
                     'open and run a g-code file, or monitor the progress of an ongoing cut. For more details see the Maslow website ' + \
-                    'at http://www.maslowcnc.com/. The source code can be downloaded at https://github.com/MaslowCNC. ' + \
+                    'at http://www.maslowcnc.com/. The source code can be downloaded at https://github.com/EBS-Maslow/GroundControl. ' + \
                     '\n\n' + \
                     'GroundControl is part of the of the Maslow Control Software Copyright (C) 2014-2017 Bar Smith. ' + \
                     'This program is free software: you can redistribute it and/or modify ' + \

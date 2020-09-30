@@ -65,7 +65,7 @@ class GroundControlApp(App):
             self.data.iconPath               = './Images/Icons/normal/'
             self.data.fontColor              = '[color=7a7a7a]'
             self.data.drawingColor           = [.47,.47,.47]
-            Window.clearcolor                = (1, 1, 1, 1)
+            Window.clearcolor                = (.1, .1, .1, 1)
             self.data.posIndicatorColor      =  [0,0,0]
             self.data.targetInicatorColor    =  [1,0,0]
         elif self.config.get('Maslow Settings', 'colorScheme') == 'Dark':
@@ -79,7 +79,7 @@ class GroundControlApp(App):
             self.data.iconPath               = './Images/Icons/darkgreyblue/'
             self.data.fontColor              = '[color=000000]'
             self.data.drawingColor           = [1,1,1]
-            Window.clearcolor                = (0.06, 0.10, 0.2, 1)
+            Window.clearcolor                = (.06, .10, .2, 1)
             self.data.posIndicatorColor      =  [0.51,0.93,0.97]
             self.data.targetInicatorColor = [1,0,0]
 
@@ -317,7 +317,7 @@ class GroundControlApp(App):
     
     def writeToTextConsole(self, message):
         try:
-            newText = self.frontpage.consoleText[-2000:] + message
+            newText = self.frontpage.consoleText[-2000:] + '  ' + message
             self.frontpage.consoleText = newText
             self.frontpage.textconsole.gotToBottom()  
         except:
@@ -384,9 +384,9 @@ class GroundControlApp(App):
                 if global_variables._keyboard:
                     global_variables._keyboard.bind(on_key_down=self.keydown_popup)
                     self._popup.bind(on_dismiss=self.ondismiss_popup)
-            elif message[0:8] == "Firmware":
+            elif message[0:8] == " Firmware":
                 self.data.logger.writeToLog("Ground Control Version " + str(self.data.version) + "\n")
-                self.writeToTextConsole("Ground Control " + str(self.data.version) + "\r\n" + message + "\r\n")
+                self.writeToTextConsole(" Ground Control " + str(self.data.version) + "\r\n" + message + "\r\n")
                 
                 #Check that version numbers match
                 if float(message[-7:]) < float(self.data.version):

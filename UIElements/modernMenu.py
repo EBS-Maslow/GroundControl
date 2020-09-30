@@ -21,7 +21,7 @@ def dist((x1, y1), (x2, y2)):
 
 class ModernMenuLabel(ButtonBehavior, Label):
     index = NumericProperty(0)
-    radius = NumericProperty(100)
+    radius = NumericProperty(150)
     siblings = NumericProperty(1)
     callback = ObjectProperty(None)
 
@@ -42,12 +42,12 @@ class ModernMenuLabel(ButtonBehavior, Label):
 class ModernMenu(Widget):
     radius = NumericProperty(50)
     circle_width = NumericProperty(5)
-    line_width = NumericProperty(2)
-    color = ListProperty([.3, .3, .3, 1])
+    line_width = NumericProperty(1)
+    color = ListProperty([1, 1, 1, 1])
     circle_progress = NumericProperty(0)
     creation_direction = NumericProperty(1)
     creation_timeout = NumericProperty(1)
-    close_After_Timeout = NumericProperty(10)
+    close_After_Timeout = NumericProperty(3)
     choices = ListProperty([])
     item_cls = ObjectProperty(ModernMenuLabel)
     item_args = DictProperty({'opacity': 0})
@@ -72,12 +72,12 @@ class ModernMenu(Widget):
             ml = self.item_cls(**kwargs)
             try:
                 if ml.text == 'Position Text Placeholder':
-                    ml.text = '[color=3333ff]X: ' + str('%.3f'%(self.xPosition)) + 'mm\nY: ' + str('%.3f'%(self.yPosition)) + 'mm [/color]'
-                if ml.text == '[color=3333ff]Move Here[/color]':
+                    ml.text = '[color=ffffff]X: ' + str('%.1f'%(self.xPosition)) + 'mm\nY: ' + str('%.1f'%(self.yPosition)) + 'mm [/color]'
+                if ml.text == '[color=ffffff]Move Here[/color]':
                     ml.callback = partial(self.parent.parent.parent.moveToPos, self.xPosition, self.yPosition)
-                if ml.text == '[color=3333ff]Mark Here[/color]':
+                if ml.text == '[color=ffffff]Mark Here[/color]':
                     ml.callback = partial(self.parent.parent.parent.createMark, self.xPosition, self.yPosition)
-                if ml.text == '[color=3333ff]Set Home[/color]':
+                if ml.text == '[color=ffffff]Set Home[/color]':
                     ml.callback = partial(self.parent.parent.parent.setHome, self.xPosition, self.yPosition)
             except:
                 print "unable to link circular menu functions"

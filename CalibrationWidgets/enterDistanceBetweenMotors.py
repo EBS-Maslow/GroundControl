@@ -24,10 +24,10 @@ class EnterDistanceBetweenMotors(GridLayout):
         self.data = App.get_running_app().data
     
     def switchUnits(self):
-        if self.unitsBtnT.text == 'Units: mm':
-            self.unitsBtnT.text = 'Units: inches'
+        if self.unitsBtnT.text == 'mm':
+            self.unitsBtnT.text = 'inches'
         else:
-            self.unitsBtnT.text = 'Units: mm'
+            self.unitsBtnT.text = 'mm'
     
     def enterValues(self):
         '''
@@ -39,14 +39,14 @@ class EnterDistanceBetweenMotors(GridLayout):
             motorsDist      = float(self.motorsDist.text)
             
             #convert from inches to mm if needed
-            if self.unitsBtnT.text == 'Units: inches':
+            if self.unitsBtnT.text == 'inches':
                 motorsDist      = motorsDist*25.4
             
             #subtract off the width of the motors
             
             motorsDist = motorsDist - 40.4
             
-            self.data.motorsDist = motorsDist
+            self.data.config.set('Maslow Settings', 'motorSpacingX', str(motorsDist))
             
             self.loadNextStep()
             

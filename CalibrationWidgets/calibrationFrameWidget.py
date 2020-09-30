@@ -75,28 +75,34 @@ class CalibrationFrameWidget(GridLayout):
         #load the first steps in the calibration process because they are always the same
         intro =  Intro()
         self.listOfCalibrationSteps.append(intro)
-        
-        chooseKinematicsType                        = ChooseKinematicsType()
-        self.listOfCalibrationSteps.append(chooseKinematicsType)
-        
-        vertDistGuess                               = VertDistToMotorsGuess()
-        self.listOfCalibrationSteps.append(vertDistGuess)
-        
+      
         setTo12                                     = SetSprocketsVertical()
         self.listOfCalibrationSteps.append(setTo12)
         
-        measureMotorDist                            = MeasureDistBetweenMotors()
-        self.listOfCalibrationSteps.append(measureMotorDist)
-        
-        chooseChainOverSprocketDirection             = ChooseChainOverSprocketDirection()
-        self.listOfCalibrationSteps.append(chooseChainOverSprocketDirection)
-        
+        enterDistanceBetweenMotors                       = EnterDistanceBetweenMotors()
+        self.listOfCalibrationSteps.append(enterDistanceBetweenMotors)
+    
+        #add extend chains
+        measureOutChains                                = MeasureOutChains()
+        self.listOfCalibrationSteps.append(measureOutChains)
+            
+        #add set z
+        adjustZCalibrationDepth                         = AdjustZCalibrationDepth()
+        self.listOfCalibrationSteps.append(adjustZCalibrationDepth)
+            
+        #add triangular kinematics
+        triangularCalibration                       = TriangularCalibration()
+        self.listOfCalibrationSteps.append(triangularCalibration)
+
         reviewMeasurements                          = ReviewMeasurements()
         self.listOfCalibrationSteps.append(reviewMeasurements)
         
         computeCalibrationSteps                     = ComputeCalibrationSteps()
-        computeCalibrationSteps.setupListOfSteps    = self.addSteps
+        finish              = Finish()
+        finish.done         = self.done
+        self.listOfCalibrationSteps.append(finish)
         self.listOfCalibrationSteps.append(computeCalibrationSteps)
+       
     
     def setupJustChainsCalibration(self):
         '''
@@ -210,75 +216,11 @@ class CalibrationFrameWidget(GridLayout):
         finish.done         = self.done
         self.listOfCalibrationSteps.append(finish)
     
-    def addSteps(self):
-        '''
-        
-        This function will be called when the ComputeCalibrationSteps step is reached. It will compute which steps are needed for a 
-        given frame configuration and add them to the list
-        
-        '''
-        
-        if App.get_running_app().data.config.get('Advanced Settings', 'chainOverSprocket') == 'Top':
-            #if we're using the top system no extra steps are needed
-            pass
-        else:
-            #if we're using the bottom method we need to remove the chain now and put it back at 12 o'clock
-            
-            removeChains                                 = RemoveChains()
-            self.listOfCalibrationSteps.append(removeChains)
-            
-            setTo12                                     = SetSprocketsVertical()
-            self.listOfCalibrationSteps.append(setTo12)
-            
-        
-        if App.get_running_app().data.config.get('Advanced Settings', 'kinematicsType') == 'Triangular':
-            #add rotation radius guess
-            rotationRadiusGuess                         = RotationRadiusGuess()
-            self.listOfCalibrationSteps.append(rotationRadiusGuess)
-            
-            #add extend chains
-            measureOutChains                                = MeasureOutChains()
-            self.listOfCalibrationSteps.append(measureOutChains)
-            
-            #add set z
-            adjustZCalibrationDepth                         = AdjustZCalibrationDepth()
-            self.listOfCalibrationSteps.append(adjustZCalibrationDepth)
-            
-            #add triangular kinematics
-            triangularCalibration                       = TriangularCalibration()
-            self.listOfCalibrationSteps.append(triangularCalibration)
-        else:
-            
-            #add extend chains
-            measureOutChains                                = MeasureOutChains()
-            self.listOfCalibrationSteps.append(measureOutChains)
-            
-            #add set z
-            adjustZCalibrationDepth                         = AdjustZCalibrationDepth()
-            self.listOfCalibrationSteps.append(adjustZCalibrationDepth)
-            
-            #Ask for guess of attachment spacing
-            distBetweenChainBrackets                    = DistBetweenChainBrackets()
-            self.listOfCalibrationSteps.append(distBetweenChainBrackets)
-            #Do quadrilateral test cut
-            quadTestCut                                 = QuadTestCut()
-            self.listOfCalibrationSteps.append(quadTestCut)
-        
-        
-        #one last review
-        reviewMeasurements                          = ReviewMeasurements()
-        self.listOfCalibrationSteps.append(reviewMeasurements)
-        
-        #add finish step
-        finish              = Finish()
-        finish.done         = self.done
-        self.listOfCalibrationSteps.append(finish)
+    
     
     def loadNextStep(self):
         '''
-        
         Called to trigger a loading of the next slide
-        
         '''
         
         self.currentStepNumber = self.currentStepNumber + 1
@@ -286,12 +228,15 @@ class CalibrationFrameWidget(GridLayout):
     
     def back(self):
         '''
-        
         Re-load the previous step
         
         '''
-        self.currentStepNumber = self.currentStepNumber - 1
-        self.loadStep(self.currentStepNumber)
+        if  self.currentStepNumber == 0:
+            self.currentStepNumber = self.currentStepNumber
+            self.loadStep(self.currentStepNumber)
+        else:    
+            self.currentStepNumber = self.currentStepNumber - 1
+            self.loadStep(self.currentStepNumber)
         
     def loadStep(self, stepNumber):
         

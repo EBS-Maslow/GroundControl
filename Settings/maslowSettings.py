@@ -46,7 +46,7 @@ settings = {
                 "title": "Distance Between Motors",
                 "desc": "The horizontal distance between the center of the motor shafts in MM.",
                 "key": "motorSpacingX",
-                "default": 2978.4,
+                "default": 2988.4,
                 "firmwareKey": 2
             },
             {
@@ -102,7 +102,7 @@ settings = {
                 "title": "z-axis installed",
                 "desc": "Does the machine have an automatic z-axis?",
                 "key": "zAxis",
-                "default": 0,
+                "default": 1,
                 "firmwareKey": 16
             },
             {
@@ -223,7 +223,7 @@ settings = {
                 "title": "Top/Bottom Chain Feed",
                 "desc": "On which side of the motor sprockets do the chains leave from to connect to the sled",
                 "options": ["Top", "Bottom"],
-                "default": "Top",
+                "default": "Bottom",
                 "key": "chainOverSprocket"
             },
             {
@@ -231,7 +231,7 @@ settings = {
                 "title": "Extend Chain Distance",
                 "desc": "The length in mm that will be extended during chain calibration",
                 "key": "chainExtendLength",
-                "default": 1651,
+                "default": 1650,
                 "firmwareKey": 11
             },
             {
@@ -256,7 +256,7 @@ settings = {
                 "desc": "How should the spindle start and stop automatically based on gcode? Leave off for none, or set external servo control, or external relay control, active high or low.",
                 "key": "spindleAutomate",
 		"options": ["None", "Servo", "Relay_High", "Relay_Low"],
-                "default": "None",
+                "default": "Relay_High",
                 "firmwareKey": 17
             },
             {
@@ -301,20 +301,20 @@ settings = {
                 "desc": "Switch between trapezoidal and triangular kinematics",
                 "options": ["Quadrilateral", "Triangular"],
                 "key": "kinematicsType",
-                "default": 'Quadrilateral'
+                "default": 'Triangular'
             },
             {
                 "type": "string",
                 "title": "Rotation Radius for Triangular Kinematics",
                 "desc": "The distance between where the chains attach and the center of the router bit in mm",
                 "key": "rotationRadius",
-                "default": 100,
+                "default": 140,
                 "firmwareKey": 8
             },
             {
                 "type": "string",
                 "title": "Chain Sag Correction Value for Triangular Kinematics",
-                "desc": "The scaled value computed by the calibration process to calculate chain sag based on sled weight, chain weight, and workspace angle",
+                "desc": "The scaled value computed by the calibration process to calculate chain sag based on sled weight, chain weight, and workspace angle\\ndefault setting: %s",
                 "key": "chainSagCorrection",
                 "default": 0,
                 "firmwareKey": 37
@@ -484,42 +484,6 @@ settings = {
                 "desc": "Zoom scale for 'Reset View' command.",
                 "key": "viewScale",
                 "default": ".45"
-            },
-            {
-                "type": "string",
-                "title": "Run",
-                "desc": "Pressing this key is the same as clicking the 'Start' button. Note combinations of keys like \'shift\' + \'=\' may not work as expected. Program must be restarted to take effect.",
-                "key": "runKey",
-                "default": "r"
-            },
-            {
-                "type": "string",
-                "title": "Pause",
-                "desc": "Pressing this key is the same as clicking the 'Pause' button. Note combinations of keys like \'shift\' + \'=\' may not work as expected. Program must be restarted to take effect.",
-                "key": "pauseKey",
-                "default": "p"
-            },
-            {
-                "type": "string",
-                "title": "Stop",
-                "desc": "Pressing this key is the same as clicking the 'Stop' button. Note upper case or shifted characters or combinations of keys like \'ctrl\' + \'=\' may not work as expected. Program must be restarted to take effect.",
-                "key": "stopKey",
-                "default": "s"
-            },
-            {
-                "type": "options",
-                "title": "FAKE_SERVO allowed",
-                "desc": "Should GroundControl allow FAKE_SERVO mode?",
-                "key": "fsModeAllowed",
-                "options": ["Not allowed", "Allowed"],
-                "default": "Not allowed",
-            },
-            {
-                "type": "string",
-                "title": "FAKE_SERVO Off",
-                "desc": "Pressing this key will turn FAKE_SERVO off. Press this key along with 'cmd', 'alt' , or 'cmd' to turn FAKE_SERVO on. Program must be restarted to take effect.",
-                "key": "fakeServo_Off",
-                "default": "f"
             }
         ],
     "Computed Settings": #These are setting calculated from the user inputs on other settings, they are not directly seen by the user

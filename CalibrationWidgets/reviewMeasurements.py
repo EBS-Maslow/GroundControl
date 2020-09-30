@@ -20,16 +20,16 @@ class ReviewMeasurements(GridLayout):
         
         self.data = App.get_running_app().data
         
-        tempString = "Lets review the measurements to make sure everything looks good. You can use the back button to repeat any step.\n\nThe current values are:"
-        tempString = tempString + "\nDistance between motors: " + self.data.config.get('Maslow Settings', 'motorSpacingX') + "mm"
-        tempString = tempString + "\nVertical motor offset: " + self.data.config.get('Maslow Settings', 'motorOffsetY') + "mm"
-        tempString = tempString + "\nKinematics type: " + self.data.config.get('Advanced Settings', 'kinematicsType')
-        tempString = tempString + "\nChain feed type: " + self.data.config.get('Advanced Settings', 'chainOverSprocket')
+        tempString = "[color=02cafc] LETS REVIEW THE MEASUREMENTS TO MAKE SURE EVERYTHING LOOKS GOOD. [/color]\n You can use the back button to repeat any step.\n\n "
+        tempString = tempString + "\n   Distance between motors: [b][color=f89405]" + self.data.config.get('Maslow Settings', 'motorSpacingX') + "mm[/color][/b]"
+        tempString = tempString + "\n   Vertical motor offset: [b][color=f89405]" + self.data.config.get('Maslow Settings', 'motorOffsetY') + "mm[/color][/b]"
+        tempString = tempString + "\n   Kinematics type: [b][color=f89405]" + self.data.config.get('Advanced Settings', 'kinematicsType') + "[/color][/b]"
+        tempString = tempString + "\n   Chain feed type: [b][color=f89405]" + self.data.config.get('Advanced Settings', 'chainOverSprocket') + "[/color][/b]"
         if self.data.config.get('Advanced Settings', 'kinematicsType') == 'Triangular':
-            tempString = tempString + "\nRotation radius: " + self.data.config.get('Advanced Settings', 'rotationRadius') + "mm"
-            tempString = tempString + "\nChain sag correction value: " + self.data.config.get('Advanced Settings', 'chainSagCorrection')
+            tempString = tempString + "\n   Rotation radius: [b][color=f89405]" + self.data.config.get('Advanced Settings', 'rotationRadius') + "mm[/color][/b]"
+            tempString = tempString + "\n   Chain sag correction value: [b][color=f89405]" + self.data.config.get('Advanced Settings', 'chainSagCorrection') + "[/color][/b]"
         else:
-            tempString = tempString + "\nSled mount spacing: " + self.data.config.get('Maslow Settings', 'sledWidth') + "mm"
+            tempString = tempString + "\n   Sled mount spacing: [b][color=f89405]" + self.data.config.get('Maslow Settings', 'sledWidth') + "mm[/color][/b]"
         
         self.measurementsReadout.text = tempString
     

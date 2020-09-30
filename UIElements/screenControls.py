@@ -16,11 +16,11 @@ class ScreenControls(FloatLayout, MakesmithInitFuncs):
         Called on creation to set up links to button background textures
         
         '''
-        self.actionsBtn.btnBackground = self.data.iconPath + 'Generic.png'
+        self.actionsBtn.btnBackground = self.data.iconPath + 'green.png'
         self.actionsBtn.textColor = self.data.fontColor
-        self.settingsBtn.btnBackground = self.data.iconPath + 'Generic.png'
+        self.settingsBtn.btnBackground = self.data.iconPath + 'yellow.png'
         self.settingsBtn.textColor = self.data.fontColor
-        self.backgroundBtn.btnBackground = self.data.iconPath + 'Generic.png'
+        self.backgroundBtn.btnBackground = self.data.iconPath + 'red.png'
         self.backgroundBtn.textColor = self.data.fontColor
     
     def openSettings(self):

@@ -108,24 +108,18 @@ class SerialPortThread(MakesmithInitFuncs):
             #self.data.message_queue.put("\n" + self.data.comport + " is unavailable or in use")
             pass
         else:
-            self.data.message_queue.put("\r\nConnected on port " + self.data.comport + "\r\n")
+            self.data.message_queue.put("\r\n  Connected on port " + self.data.comport + "\r\n")
             print("\r\nConnected on port " + self.data.comport + "\r\n")
             gcode = ""
             msg = ""
             subReadyFlag = True
             
-            
-            if self.serialInstance.isOpen(): 
-                self.serialInstance.close()
-            
+            self.serialInstance.parity = serial.PARITY_ODD #This is something you have to do to get the connection to open properly. I have no idea why.
+            self.serialInstance.close()
             self.serialInstance.open()
-            
-            # reset Arduino boards by toggling DTR signal
-            self.serialInstance.dtr = False
-            self.serialInstance.dtr = True
-            
-            # reset non-Arduino boards by sending 
-            self._write(b'\x18') # ctrl-X
+            self.serialInstance.close()
+            self.serialInstance.parity = serial.PARITY_NONE
+            self.serialInstance.open()
             
             #print "port open?:"
             #print self.serialInstance.isOpen()
